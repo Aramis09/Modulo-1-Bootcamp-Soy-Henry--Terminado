@@ -17,32 +17,29 @@ function LinkedList() {
   this.leength = 0;
   
   LinkedList.prototype.add =function(value) {
-    if(this.head === null){
+    if(this.head === null){// es lo mismo que estoi 'this.head === null'
         this.head = new Node(value)
         this.leength++
     }else{
         let aux = this.head
-        while(aux !== null){
-            if(aux.next == null){ 
-                aux.next = new Node(value)
-                this.leength++
-                break
-            }
-            else {aux = aux.next} 
+        while(aux.next !== null){//es lo mismo que esto 'aux.next !== null'
+          aux = aux.next;      
         }
+        aux.next = new Node(value);
+        this.leength++;   
     }
-}
+  }
 
   LinkedList.prototype.remove =function(){
     let aux = this.head;
     if(this.head == null){return null}
-    if(this.head.next == null){ 
+    if(this.head.next == null){ //this.head.next == null
       this.lastNodeRemove= this.head.value;
       this.head = null;
       this.leength--;
       return this.lastNodeRemove;
     }
-    while(aux.next.next!==null){
+    while(aux.next.next !==null){//aux.next.next!==null
       aux = aux.next;
     }
     this.leength--;
@@ -53,16 +50,21 @@ function LinkedList() {
 
   LinkedList.prototype.search= function(elemento){
     let aux = this.head;
-    while(aux !== null){
-      if(typeof(elemento)==='function'){
-        if(elemento(aux.value)){ return aux.value}
+    while(aux){//aux !== null
+      if(typeof(elemento)==='function' && elemento(aux.value)){
+         return aux.value;
       }
       if(aux.value === elemento){
         return aux.value;
       }
-      aux = aux.next
+      aux = aux.next;
     }
-    return null
+    return null;
+  }
+
+  LinkedList.prototype.orderList = function() {
+    let aux = this.head;
+    
   }
 }
 

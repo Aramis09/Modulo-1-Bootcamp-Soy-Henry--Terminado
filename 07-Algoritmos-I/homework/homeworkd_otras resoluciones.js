@@ -1,6 +1,3 @@
-'use strict'
-// No cambies los nombres de las funciones.
-
 function factorear(num) {//aplique recursividad porque me  tiene traumado.
   // Factorear el número recibido como parámetro y devolver en un array
   // los factores por los cuales se va dividiendo a dicho número (De menor a mayor)
@@ -23,6 +20,23 @@ function factorear(num) {//aplique recursividad porque me  tiene traumado.
     else{return r(n,p+1,fact)}
   } 
 }
+
+// resolcuion de dai, mucho mas corta y sin recursividad.
+function factorear(num){
+    let factors = [1];
+    let x = 2;
+    while(num > 1){
+        if(num % x ===0){
+            factors.push(x);
+        }
+        else{
+            x++;
+        }
+    }
+    return factors;
+}
+
+
 function bubbleSort(array) {
   // Implementar el método conocido como bubbleSort para ordenar de menor a mayor
   // el array recibido como parámetro
@@ -51,6 +65,23 @@ function bubbleSort(array) {
     }
   }
   return array;
+}
+//resolucion de dai de la Burbuja. // Tengo mis dudas sobre esta forma de resolucion, tengo que hacer la prueba.
+function bubbleSort(array){
+    let swap = true;
+    while(swap){
+        swap = false;
+        for (let i = 0; i < array.length - 1; i++) {
+            if(array[i] > array[i + 1]){
+                let aux = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] =  aux;
+                swap = true;
+            }
+            
+        }
+    }
+    return array;
 }
   
     
@@ -91,53 +122,32 @@ function insertionSort(array) {
     return array
     
 }  
-
-
-
-
-
-function selectionSort(array) {
-  // Implementar el método conocido como selectionSort para ordenar de menor a mayor
-  // el array recibido como parámetro utilizando dos arreglos
-  // Devolver el array ordenado resultante
-  // Tu código:
-  let menor = array[0] // Este no me salio
-  let indexMenor = 0
-  let x = 'No_terminado'
-  while(x !== 'Terminado'){
-    for (let i = 0; i < array.length; i++) {
-      if(array[i]<menor){
-        menor = array[i]
-        indexMenor = i
-      }
-    }
-    array[indexMenor]= array[0]
-    array[0]=menor
-    let broke = 0
-      for (let k = 0; k < array.length-1; k++) {
-        if(broke===1){ break}
-        for (let j = k+1; j < array.length; j++) {
-          if( array[k] > array[j]){  
-            broke = 1
-          }
-          else if(array[k]===array[array.length-2] && broke === 0){ x = 'Terminado'} {
-            x = 'Terminado'
-          } 
+// Resolucion de dai del Insertion Sort. Parece mas corta, no tengo dudas sobre esta.
+function insertionSort(array){
+    for (let i = 1; i < array.length; i++) {
+        let j = i - 1;
+        let aux = array[i];
+        while(j >= 0 && aux< array[i]){
+            array[j + 1] = array[j];
+            j--;
         }
-      }
+        array[j + 1] = aux;
     }
-    return array
+    return array;
 }
+//Resolucion de dar Selection Sort. No me queda ninguna duda dobre esta resolucion. Es la que me falta.
 
-
-
-
-// No modificar nada debajo de esta línea
-// --------------------------------
-
-module.exports = {
-  factorear,
-  bubbleSort,
-  insertionSort,
-  selectionSort,
-};
+for (let i = 0; i < array.length; i++) {
+    let min = i;
+    for (let j = i + 1; j < array.length; j++) {
+        if(array[j] < array[min]){
+            min = j;
+        }
+        
+    }
+    if( i !== min){
+        let aux = array[i];
+        array[i] = array[min];
+        array[min] = aux;
+    }
+}
